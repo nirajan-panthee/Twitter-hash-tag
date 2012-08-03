@@ -1,0 +1,149 @@
+	.right .tbl .table-striped  .header {
+		background-image:url(../img/bg.gif);
+		background-repeat:no-repeat;
+		background-position:right;
+	}
+	
+	body{
+		 background-color:#33CCFF;
+	}
+	
+	.head{
+		width:100%;
+		position:fixed;
+		background-color:#000000;
+		text-align:center;
+	}
+	
+	.head a{
+		text-decoration:none;
+	}
+	
+	.head a h2{
+		color:#CCCCCC;
+		display:inline;
+		margin:0 auto;
+	}
+	.head a h2 img {
+		width:40px;
+		height:30px;
+		vertical-align:top;
+	}
+	
+	#message{
+		background-color:#FFFFFF;
+		width:450px;
+		margin:0 auto;
+	}
+	
+	#suggest{
+		background-color:#FFFFFF;
+		width:450px;
+		margin:0 auto;
+	}
+	
+	.container{
+		background-image:url(../img/wash-white-30.png); 
+		width:1015px;
+	}
+	
+	.container .right{
+		width:310px;
+		float:right;
+		margin-right:40px;
+	}
+	
+	.container .right .add{
+		background-color:#FFFFFF;
+		margin-left:20px;
+		margin-top:23px;
+		border-radius:10px;
+		padding:10px;
+		width:290px;
+	}
+	
+	.container .right .add #addnewtag input{
+		vertical-align:top;
+	}
+	
+	.container .right .tbl{
+		background-color:#FFFFFF;
+		margin:20px 0 10px 20px;
+		width:310px;
+		border-radius:10px;
+	}
+	
+	.container .right .tbl h3{
+		margin-bottom:0px;
+		margin-left:5px;
+	}
+	
+	.container .right .tbl h3 #search{
+		border-radius:30px;
+		width:100px;
+		background-color:#F2F2F2;
+		float:right;
+		margin:5px 5px 0 0;
+	}
+	
+	.container .right .tbl #tblS{
+		width:100%;
+		border:1px solid white;
+	
+	}
+	
+	.container .right .tbl #tblS thead tr th{
+		cursor:pointer;
+		font-size:15px;
+	}
+	
+	.container .right .tbl #tblS tbody tr td a{
+		color:#000000;
+		cursor: pointer;
+	}
+	
+	.container .info{
+		background-color:#FFFFFF; 
+		margin:20px 0 20px 20px; 
+		border-radius:10px;
+		width:630px;
+		float:left;
+		padding:10px 0 10px 0;
+	}
+	
+	.container .info .clearfix{
+		width:100%;
+	}
+	
+	.container .info .clearfix .count{
+		margin-left:20px;
+		float:left;
+	}
+	
+	.container .info .clearfix .count h2{
+		text-align:center;
+	}
+	
+	.container .info .clearfix .count h6{
+		text-align:center;
+	}
+	
+	.container .info .clearfix .update{
+		float:right;
+		margin-right:20px;
+	}
+	
+	.container #postedComments{
+		background-color:#FFFFFF; 
+		border-radius:20px;
+		width:630px;
+		float:left;
+		padding-top:20px;
+		margin-left:20px;
+	}
+	
+	.container #loadMoreComments{
+		display:none;
+		float:left;
+		margin-right:500px;
+	}

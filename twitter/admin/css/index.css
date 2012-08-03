@@ -1,0 +1,174 @@
+	.coda-slider-wrapper .coda-slider .panel {
+		width: 780px;
+	}
+			
+	#slider-id{
+		border-bottom-left-radius:10px;
+		border-bottom-right-radius:10px;
+		width:780px;
+		margin:0px;
+		padding-left:15px;
+	}
+	.coda-slider-wrapper .coda-nav-left a, .coda-slider-wrapper .coda-nav-right a {
+		width:auto;
+		background-color:#1a667f;
+	}
+	
+	.coda-slider-wrapper {
+		margin: 0 auto;
+	}
+			
+	.coda-slider-wrapper .coda-nav ul li a{
+		background-color:#1a667f;
+	}
+	
+	.panel-wrapper .hash{
+		background-color:#FFFFFF;
+		margin-right:20px;
+		margin-bottom:20px;
+		padding:5px;
+	}
+			
+	.panel-wrapper .hash a{
+		color:#000000;
+		cursor: pointer;
+		text-decoration:none;
+	}
+	
+	.panel-wrapper .hash a h3{
+		color=#000000;
+		margin-bottom:0;
+		background-color:#DDDDDD;
+		border-radius:5px;
+		font-size:20px;
+	}
+			
+	.panel-wrapper .hash p{
+		color:#797979;
+	}
+			
+	.panel-wrapper .hash form #csv{
+		background-image:url(../img/download.png);
+		height:23px;
+	}
+	
+	
+	
+	.panel-wrapper .hash form #act{
+		background-image:url(../img/activate.png);
+		height:23px;
+		background-repeat:no-repeat;	
+	}
+			
+	.panel-wrapper .hash form #deac{
+		background-image:url(../img/dactivate.png);
+		background-repeat:no-repeat;
+		height:23px;
+	}
+			
+	.panel-wrapper .hash form #delete{
+		background-image:url(../img/delete.png);
+		height:23px;
+	}
+			
+	.header{
+		padding-top:5px;
+		text-align:center;
+			
+	}
+			
+	.header .logo {
+		display:inline;
+		margin-left:300px;
+	}
+	
+	.header .logo a{
+		text-decoration:none;
+	}
+			
+	.header .logo a h2{
+		display:inline;
+	}
+			
+	.header .logo a h2 img{
+		vertical-align:top;
+	}
+			
+	.header .search {
+		float:right;
+		margin-right:130px;
+		height:30px;
+	}
+			
+	.header .search #tw-form{
+		width:180px;
+		height:25px;
+	}
+			
+	.content{
+		padding-bottom:10px;
+		text-align:center;
+	}
+			
+	.content .add-wrap{
+		margin-top:15px;
+	}
+
+	.content .add-wrap .add{
+		text-align:center;
+	}
+			
+	.content .add-wrap .add #addnewtag label h2{
+		color:#000000;
+	}
+
+	.content .add-wrap .add #addnewtag input{
+		width:600px;
+		height:40px;
+		font-size:21px;
+	}
+
+	.content .add-wrap .add #addnewtag button{
+		vertical-align:top;
+		width:300px;
+		height:50px;
+	}
+			
+	.content .add-wrap .add #message{
+		width:450px;
+		margin: 0 auto;
+	}
+			
+	.content .add-wrap .add #suggest .btn{
+		background-image:url(../img/activate.png);
+		height:23px;
+		background-repeat:no-repeat;
+	}
+			
+	.content #bodywraper{
+		background-color:#F2F2F2;
+		text-align:center;
+		width:auto;
+	}
+	
+	.content .clearfix .menu{
+		float:left;
+		width:100%;
+		margin-top:5px;
+	}
+			
+	.content .clearfix .menu #active{
+		float:right;
+		margin:0 10px 0 0;
+		background-color:#FFFFFF;
+		padding:5px;
+		border-radius:10px;
+	}
+			
+	.content .clearfix .menu #deactive{
+		float:right;
+		margin:0 20px 0 0;
+		background-color:#b5b5b5;
+		padding:5px;
+		border-radius:10px;
+	}
