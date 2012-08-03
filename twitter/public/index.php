@@ -6,12 +6,9 @@
 		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
 		<meta name="description" content="Codaslider : JQuery Slider Plugin" />
 		
-		<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">-->
+		
 		<link rel="stylesheet" type="text/css" media="screen" href="./css/coda-slider.css">
-		<link rel="stylesheet" href="bootstrap/css/custom.css">
+		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/index.css">
 		
 		<script src="./js/jquery-1.7.2.min.js"></script>
