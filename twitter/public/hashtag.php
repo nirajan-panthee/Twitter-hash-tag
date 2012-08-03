@@ -17,11 +17,11 @@
 		<script type="text/javascript" src="js/hashtag.js"></script>
 	</head>
 
-	<body style="background-color:#42A7C9">
-		<div  class="head" style="background-image:url(gradient.png)">  
+	<body>
+		<div  class="head">  
 			<a href="index.php">
-				<h2 style="color:#FFFFFF">
-					<img src="img/twitter.png"  alt="twitter logo" style="width:25px;height:20px;margin-top:10px" />Twitter # Tag
+				<h2>
+					<img src="img/twitter.png"  alt="twitter logo"  />Twitter # Tag
 				</h2>
 			</a>
 
@@ -41,9 +41,9 @@
 	?>
 
 
-				<div class="container" style="background-image:none">
+				<div class="container" >
 
-					<div class="right" style="margin-right:0px;width:auto;margin-top:20px;border-radius:10px;box-shadow:0 0 15px #000000">
+					<div class="right" >
 
 
 					<?php 
@@ -60,7 +60,7 @@
 
 
 
-						<div class="tbl" style="margin:0px">
+						<div class="tbl">
 
 							<h3>List of All # Tag 
 								<input type="text" id="search" placeholder="search"  />
@@ -114,9 +114,9 @@
 					</div>
 
 
-					<div class="info" style="border-radius:30px 0 30px 0;box-shadow:0 0 15px #000000">
+					<div class="info" >
 						<div class="clearfix" id="bodywraper">
-							<div class="count" style="">
+							<div class="count">
 								<h2>
 									<?php echo $_GET['hash']; ?>
 								</h2>
@@ -136,16 +136,16 @@
 								<h6 align="right" title="json format" >
 									<a href="tweetapi.php?hash=<?php echo urlencode($input); ?>" target="_blank">Json</a>
 								</h6>
-								<h6 id="hover" align="right" title="embed code" style="cursor:pointer;color:#33ccff" >Embed</h6>
+								<h6 id="hover" align="right" title="embed code"  >Embed</h6>
 	
-								<div id="embed" style="display:none;position:absolute;background-color:#E69926;margin-right:20px;box-shadow:0 0 15px #000000;border-radius:20px;padding:10px" >
+								<div id="embed"  >
 									<b>&lt;iframe width="460" height="315" src="http://localhost/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"
 									frameborder="0" allowfullscreen>&lt;/iframe&gt;</b>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="postedComments" style="box-shadow:0 0 15px #000000">
+					<div id="postedComments" >
 
 						<table class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px">
 						<?php 

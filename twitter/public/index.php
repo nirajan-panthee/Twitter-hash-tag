@@ -48,14 +48,14 @@
 		
 	</head>
 	
-	<body style="background-color:#42A7C9">
+	<body>
 	
 	
-		<div class="header" style="background-image:url(gradient.png)">
+		<div class="header" >
 			<div class="logo">
 				<a href="index.php">
-					<h2 style="color:#FFFFFF">
-						<img src="img/twitter.png" alt="<h6>twitter logo<h6>" style="width:25px;height:20px;" />Twitter # Tag
+					<h2>
+						<img src="img/twitter.png" alt="<h6>twitter logo<h6>"  />Twitter # Tag
 					</h2>
 				</a>
 			</div>
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 	
-		<div class="content" style="background-image:none">
+		<div class="content" >
 	
 	
 	
@@ -82,7 +82,7 @@
 	
 		
 		
-			<div class="clearfix" id="bodywraper" style="margin-top:40px;border-radius:50px 0 50px 0;box-shadow:0 0 15px #000000">
+			<div class="clearfix" id="bodywraper" >
 
 				<div class="coda-slider" id="slider-id">
 				<?php
@@ -110,11 +110,11 @@
 					<?php 
 						if($hashcount['0']==0){
 					?>
-							<a onclick="notweet()" ><h3 style="color:#0088CC"><?php echo $hash; ?> </h3></a><p style=""><?php echo "(".$hashcount['0'].")";?> </p>
+							<a onclick="notweet()" ><h3 style="color:#0088CC"><?php echo $hash; ?> </h3></a><p><?php echo "(".$hashcount['0'].")";?> </p>
 					<?php
 						} else { 
 					?>
-							<a href="<?php echo "hashtag.php?hash=".urlencode($hash);  ?>"><h3 style="color:#0088CC"><?php echo $hash; ?> </h3></a><p style=""><?php echo "(".$hashcount['0'].")"; ?></p>
+							<a href="<?php echo "hashtag.php?hash=".urlencode($hash);  ?>"><h3 style="color:#0088CC"><?php echo $hash; ?> </h3></a><p ><?php echo "(".$hashcount['0'].")"; ?></p>
 			
 					<?php 
 							} 

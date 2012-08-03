@@ -5,13 +5,13 @@
 	}
 	
 	body{
-		 background-color:#33CCFF;
+		 background-color:#42A7C9;
 	}
 	
 	.head{
 		width:100%;
 		position:fixed;
-		background-color:#000000;
+		background-image:url(../img/gradient.png);
 		text-align:center;
 	}
 	
@@ -20,13 +20,14 @@
 	}
 	
 	.head a h2{
-		color:#CCCCCC;
+		color:#FFFFFF;
 		display:inline;
 		margin:0 auto;
 	}
 	.head a h2 img {
-		width:40px;
-		height:30px;
+		width:25px;
+		margin-top:10px;
+		height:20px;
 		vertical-align:top;
 	}
 	
@@ -43,14 +44,17 @@
 	}
 	
 	.container{
-		background-image:url(../img/wash-white-30.png); 
+		
 		width:1015px;
 	}
 	
 	.container .right{
-		width:310px;
+		width:auto;
 		float:right;
-		margin-right:40px;
+		margin-right:0px;
+		margin-top:20px;
+		border-radius:10px;
+		box-shadow:0 0 15px #000000;
 	}
 	
 	.container .right .add{
@@ -68,7 +72,7 @@
 	
 	.container .right .tbl{
 		background-color:#FFFFFF;
-		margin:20px 0 10px 20px;
+		margin:0;
 		width:310px;
 		border-radius:10px;
 	}
@@ -102,10 +106,26 @@
 		cursor: pointer;
 	}
 	
+	#hover{
+		cursor:pointer;
+		color:#33ccff;
+	}
+	
+	#embed{
+		display:none;
+		position:absolute;
+		background-color:#E69926;
+		margin-right:20px;box-shadow:0 0 15px #000000;
+		border-radius:20px;
+		padding:10px;
+	}
+	
 	.container .info{
+	
+		box-shadow:0 0 15px #000000;
 		background-color:#FFFFFF; 
 		margin:20px 0 20px 20px; 
-		border-radius:10px;
+		border-radius:30px 0 30px 0;
 		width:630px;
 		float:left;
 		padding:10px 0 10px 0;
@@ -134,6 +154,7 @@
 	}
 	
 	.container #postedComments{
+		box-shadow:0 0 15px #000000;
 		background-color:#FFFFFF; 
 		border-radius:20px;
 		width:630px;
