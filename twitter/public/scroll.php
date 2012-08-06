@@ -13,7 +13,7 @@
 	
 			if($last==$i){}else{ 
 ?>
-			<table id="postedComments" class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px" style="margin-left:0px">
+			<table  class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px" style="margin-left:0px">
 			<?php
 				$limit=mysql_real_escape_string($_GET['lastComment']+1);
 				$sqlresult = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' ORDER BY TweetID DESC LIMIT $limit,20");
