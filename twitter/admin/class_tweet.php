@@ -49,7 +49,7 @@
 			foreach($tweet as $p) {
 	
 
-			$sql[]='("'.mysql_real_escape_string($hash).'","'.mysql_real_escape_string($p["id_str"]).'","'.mysql_real_escape_string($p["from_user_id"]).'","'.mysql_real_escape_string($p["from_user"]).'","'.mysql_real_escape_string($p["from_user_name"]).'","'.mysql_real_escape_string($p["text"]).'","'.mysql_real_escape_string($p["created_at"]).'","'.mysql_real_escape_string($p["profile_image_url"]).'")';
+			$sql[]='("'.mysql_real_escape_string($hash).'","'.mysql_real_escape_string($p["id_str"]).'","'.mysql_real_escape_string($p["from_user_id"]).'","'.mysql_real_escape_string($p["from_user"]).'","'.mysql_real_escape_string($p["from_user_name"]).'","'.mysql_real_escape_string($p["text"]).'","'.mysql_real_escape_string(strtotime($p["created_at"])).'","'.mysql_real_escape_string($p["profile_image_url"]).'")';
 			
 			}
 			mysql_query('INSERT INTO infotweets (HashTag,TweetID,UserID_No,UserID,UserName,Tweets,DateTime,image) VALUES' .implode(',',$sql));
