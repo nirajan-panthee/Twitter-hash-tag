@@ -171,10 +171,10 @@
 									<td>
 										<b style="display:inline"><?php echo $row['UserName']; ?></b>
 										<?php 
-											$time=str_replace("+0000","+0545",$row['DateTime']); 
+											$time=(int)$row['DateTime']; 
 										?>
 			
-										<p style="font-size:10px;float:right"><?php echo Date('H:m:s D,d M Y',strtotime($time)); ?></p>
+										<p style="font-size:10px;float:right"><?php echo Date('H:m:s D,d M Y',$time); ?></p>
 										<p><?php echo $tweet."<br/>"; ?></p>
 									</td>
 									

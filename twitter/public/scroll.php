@@ -33,7 +33,7 @@
 			
 						<td>
 							<b style="display:inline"><?php echo $row['UserName']; ?></b>
-							<p style="font-size:10px;float:right"><?php echo Date('H:m:s D,d M Y',strtotime($row['DateTime'])); ?></p>
+							<p style="font-size:10px;float:right"><?php echo Date('H:m:s D,d M Y',(int)$row['DateTime']); ?></p>
 							<p><?php echo $tweet."<br/>"; ?></p>
 						</td>
 					</tr>

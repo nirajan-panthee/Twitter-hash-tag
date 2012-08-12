@@ -1,38 +1,103 @@
 <?php 
-include '../connection.php';
-$hash='#ajax';
-$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%Y')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' GROUP BY dates");
-while($row=mysql_fetch_array($date_day)){
-				
-				
-				$y=$row['dates'];
-				$yearname="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$y."\">".$y."</a>";
-				$data['year'][]=$yearname;
-				//echo $data['year'][0];
-				//$data['year'][]="<b>".$y."</b>";
-				$data['tweets'][]=(int)$row['tweetcount'];
-				
-				 
+	
+	if(isset($_GET['hash'])){
+			
+			include '../connection.php';
+			$hash=$_GET['hash'];
+	
+		
+		if(isset($_GET['year'])&&!isset($_GET['month'])){
 			
 			
-			$date_user=mysql_query("SELECT DISTINCT(UserID) as users,COUNT(Tweets) as count ,Image FROM `infotweets` WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$y' GROUP BY users ORDER BY count DESC LIMIT 0,3 ");
-			$i=0;
-			$topuser="<b>Top user</b><br/>";
-			
-			while($row1=mysql_fetch_array($date_user)){
-					//$topuser.="<img  src=\"http://a0.twimg.com/profile_images/1407053584/AndreaUtente11_normal.jpg\" style=\"width=30px;height=30px;float:left;clear:left;margin-right:3px\"><div style=\"height:40px;float:left;font-size:13px\"><b style=\"color:blue\">Topuser1</b><br/> 23 tweets</br></div>";
+				$year=$_GET['year'];
+				$index=$hash." in ".$year;
+				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%b')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$year' GROUP BY dates");
+		
+			while($row=mysql_fetch_array($date_day)){
+				
+					$y=$row['dates'];
+					$year_month=$year.",".$y;
+					$yearname="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$year."&month=".$y."\">".$y."</a>";
+					
+					$data['year'][]=$yearname;
+					$data['tweets'][]=(int)$row['tweetcount'];
+					$date_user=mysql_query("SELECT DISTINCT(UserID) as users,COUNT(Tweets) as count FROM `infotweets` WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y,%b')='$year_month' GROUP BY users ORDER BY count DESC LIMIT 0,3 ");
+				
+					$i=0;
+					$topuser="<b>Top user</b><br/>";
+				while($row1=mysql_fetch_array($date_user)){
+					
 					$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
-					//$data[$y]['topuser'][$i]['username']=$row1['users'];
-					//$data[$y]['topuser'][$i]['tweets']=$row1['count'];
-					//$data[$y]['topuser'][$i]['image']=$row1['Image'];
-					
-					
 					$i++;
-					}
-			$data[$yearname]=$topuser;
+					
+				}
+				$data[$yearname]=$topuser;
+					 
+			}
+	
+		} 
+		else if(isset($_GET['year'])&&isset($_GET['month'])) {
+
+				$year=$_GET['year'];
+				$month=$_GET['month'];
+				$year_month=$year.",".$month;
+			
+				$index=$hash." in ".$month.",".$year;
+				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%d')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y,%b')='$year_month' GROUP BY dates");
+		
+			while($row=mysql_fetch_array($date_day)){
+				
+					$y=$row['dates'];
+					$year_day=$year.",".$month.",".$y;
+					$yearname=$y;
+					
+					$data['year'][]=$yearname;
+					$data['tweets'][]=(int)$row['tweetcount'];
+					$date_user=mysql_query("SELECT DISTINCT(UserID) as users,COUNT(Tweets) as count FROM `infotweets` WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y,%b,%d')='$year_day' GROUP BY users ORDER BY count DESC LIMIT 0,3 ");
+				
+					$i=0;
+					$topuser="<b>Top user</b><br/>";
+			
+				while($row1=mysql_fetch_array($date_user)){
+					
+					$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
+					$i++;
+					
+				}
+				$data[$yearname]=$topuser;
+					 
+			}
+		}
+		else{
+		
+				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%Y')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' GROUP BY dates");
+				$index=$hash;
+			
+			while($row=mysql_fetch_array($date_day)){
+		
+					$y=$row['dates'];
+					$yearname="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$y."\">".$y."</a>";
+					$data['year'][]=$yearname;
+		
+					$data['tweets'][]=(int)$row['tweetcount'];
+					$date_user=mysql_query("SELECT DISTINCT(UserID) as users,COUNT(Tweets) as count FROM `infotweets` WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$y' GROUP BY users ORDER BY count DESC LIMIT 0,3 ");
+					$i=0;
+			
+					$topuser="<b>Top user</b><br/>";
+			
+				while($row1=mysql_fetch_array($date_user)){
+				
+						$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
+						$i++;
+				}
+				$data[$yearname]=$topuser;
 					 
 					
-}
+			}
+		}
+		mysql_close($con);
+	}
+	
 
 
 ?>
@@ -54,7 +119,7 @@ while($row=mysql_fetch_array($date_day)){
 								marginBottom: 25
 							},
 							title: {
-								text: 'Time line Graph OF <?php echo $hash; ?>',
+								text: 'Time line Graph OF <?php echo $index; ?>',
 								x: -20 //center
 							},
 							//subtitle: {
