@@ -2,9 +2,9 @@
 	<head>
 
 			<meta charset='utf-8' />
-			<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+			<link rel="stylesheet" href="css/custom_hash.css">
 			<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">-->
-			<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css">
+			<!--link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css"-->
 			<!--<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">-->
 			
 			<script type="text/javascript" src="js/jquery-latest.js"></script>
@@ -34,9 +34,9 @@
 
 	
 		<?php  
-			if($_GET['hash']){
+			if(isset($_GET['hash'])){
 					$hash=$_GET['hash']; 
-				if($_GET['num']){
+				if(isset($_GET['num'])){
 					$num=$_GET['num'];
 				}
 				else{
@@ -49,7 +49,7 @@
 		<div style="background-color:#FFFFFF;border-radius:10px;padding:5px">
 			<?php
 					$dhash=strtolower(urlencode($hash));
-					$url = "http://localhost/twitter/public/tweetapi.php?hash=$dhash&num=$num";
+					$url = "http://localhost/Twitter-hash-tag/twitter/public/tweetapi.php?hash=$dhash&num=$num";
 					$curl = curl_init();
 					curl_setopt( $curl, CURLOPT_URL, $url );
 					curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1 );
@@ -64,7 +64,7 @@
 			
 				<?php
 					foreach($json['data'] as $p) {
-
+						$time=(int)$p['DateTime'];
 				?>
 
 						<tr align="left"style="font-size:10px;" >
@@ -81,7 +81,7 @@
 							<td>
 								<div>
 									<p style="float:left"><b><?php echo $p['UserName']; ?></b></p>
-									<p style="float:right"><?php echo Date('H:m:s D,d M Y',strtotime($p['DateTime'])); ?></p>
+									<p style="float:right"><?php echo Date('H:m:s D,d M Y',$time); ?></p>
 									<p style="float:left"><?php echo get_link($p['Tweets']); ?></p>
 								</div>
 							</td>
