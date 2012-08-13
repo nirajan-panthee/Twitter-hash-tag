@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<title>Hash Tag</title>
 		<meta http-equiv="Content-Type" content="text/html; charset= utf-8">
 		
 		<link rel="stylesheet" href="css/custom_hash.css">
 		<link rel="stylesheet" href="css/hashtag.css">
 		
 		<script type="text/javascript" src="js/jquery-latest.js"></script> 
-		<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+		
 		<script type="text/javascript">
 			
 			var hashtag='<?php echo urlencode($_GET['hash']); ?>';	
@@ -18,7 +19,7 @@
 	</head>
 
 	<body>
-		<div  class="head">  
+		<div  class="head" style="z-index:33">  
 			<a href="index.php">
 				<h2>
 					<img src="img/twitter.png"  alt="twitter logo"  />Twitter # Tag
@@ -30,14 +31,14 @@
 
 	<?php 
 		require 'connection.php';
-	
+		
 		
 		if(isset($_GET['hash'])) {
 				$check = str_split($_GET['hash']);
 
 			if($check['0']=='#') {
 
-
+				
 	?>
 
 
@@ -46,9 +47,19 @@
 					<div class="right" >
 
 
-					<?php 
-						$input=$_GET['hash']; 
-						$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input'"));
+					<?php
+						$input=$_GET['hash'];
+						$user_query="";
+						$userID="";
+						if(isset($_GET['user'])){
+							$user_query="AND UserID='".$_GET['user']."'";
+							$userID="@".$_GET['user'];
+						}
+					
+					
+						 
+						
+						$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input' $user_query"));
 						$new=mysql_fetch_array(mysql_query("SELECT HashTag FROM infomax WHERE HashTag='$input'"));
 						$view=mysql_fetch_array(mysql_query("SELECT View FROM infomax WHERE HashTag='$input'"));
 						$view_num=$view['View']+1;
@@ -118,8 +129,14 @@
 						<div class="clearfix" id="bodywraper">
 							<div class="count">
 								<h2>
-									<?php echo $_GET['hash']; ?>
+									<?php 
+									
+									
+									echo "<a href='hashtag.php?hash=".urlencode($_GET['hash'])."'>".$_GET['hash']."</a> " ?>
 								</h2>
+								<h4>
+								<?php echo $userID; ?>
+								</h4>
 
 								<h6>
 									<?php echo $tweet_no['0']." "; ?> tweets Available
@@ -138,20 +155,24 @@
 								</h6>
 								<h6 id="hover" align="right" title="embed code"  >Embed</h6>
 	
-								<div id="embed"  >
+								<div id="embed" style="z-index:3" >
 									<b>&lt;iframe width="460" height="315" src="http://localhost/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"
 									frameborder="0" allowfullscreen>&lt;/iframe&gt;</b>
 								</div>
 							</div>
+							<?php include 'graph.php'; ?>
 						</div>
+						
 					</div>
+					
 					<div id="postedComments" >
 
 						<table class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px">
 						<?php 
 			
 							$hash = mysql_real_escape_string(strtolower($_GET['hash']));
-							$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' ORDER BY TweetID DESC LIMIT 0,20");
+							
+							$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' $user_query ORDER BY TweetID DESC LIMIT 0,20");
 							$i=1;
 							while($row = mysql_fetch_array($result)){   
 		
@@ -263,7 +284,7 @@
 
 ?>
 
-
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
 
 </body>
 </html>

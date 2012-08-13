@@ -2,22 +2,24 @@
 	
 	if(isset($_GET['hash'])){
 			
-			include '../connection.php';
+			include 'connection.php';
 			$hash=$_GET['hash'];
+			$goto="All Time";
 	
 		
 		if(isset($_GET['year'])&&!isset($_GET['month'])){
 			
-			
+				$goto="<a href=\"graph.php?hash=".urlencode($hash)."\" class=\"graph\">Go Back</a>";
+				
 				$year=$_GET['year'];
-				$index=$hash." in ".$year;
-				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%b')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$year' GROUP BY dates");
+				$index=$year;
+				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%b')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$year' GROUP BY dates ORDER BY dates DESC");
 		
 			while($row=mysql_fetch_array($date_day)){
 				
 					$y=$row['dates'];
 					$year_month=$year.",".$y;
-					$yearname="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$year."&month=".$y."\">".$y."</a>";
+					$yearname="<a  href=\"graph.php?hash=".urlencode($hash)."&year=".$year."&month=".$y."\">".$y."</a>";
 					
 					$data['year'][]=$yearname;
 					$data['tweets'][]=(int)$row['tweetcount'];
@@ -27,7 +29,7 @@
 					$topuser="<b>Top user</b><br/>";
 				while($row1=mysql_fetch_array($date_user)){
 					
-					$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
+					$topuser.= "<b><a  style=\"color:red\" href=\"../public/hashtag.php?hash=".urlencode($hash)."&user=".$row1['users']."\">".$row1['users']."</a>:</b> ".$row1['count']." tweets<br/>";
 					$i++;
 					
 				}
@@ -41,8 +43,8 @@
 				$year=$_GET['year'];
 				$month=$_GET['month'];
 				$year_month=$year.",".$month;
-			
-				$index=$hash." in ".$month.",".$year;
+				$goto="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$year."\" class=\"graph\">Go Back</a>";
+				$index=$month.",".$year;
 				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%d')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y,%b')='$year_month' GROUP BY dates");
 		
 			while($row=mysql_fetch_array($date_day)){
@@ -60,7 +62,7 @@
 			
 				while($row1=mysql_fetch_array($date_user)){
 					
-					$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
+					$topuser.= "<b><a   style=\"color:red\" href=\"../public/hashtag.php?hash=".urlencode($hash)."&user=".$row1['users']."\">".$row1['users']."</a>:</b> ".$row1['count']." tweets<br/>";
 					$i++;
 					
 				}
@@ -71,12 +73,12 @@
 		else{
 		
 				$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%Y')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' GROUP BY dates");
-				$index=$hash;
+				$index="";
 			
 			while($row=mysql_fetch_array($date_day)){
 		
 					$y=$row['dates'];
-					$yearname="<a href=\"graph.php?hash=".urlencode($hash)."&year=".$y."\">".$y."</a>";
+					$yearname="<a  href=\"graph.php?hash=".urlencode($hash)."&year=".$y."\">".$y."</a>";
 					$data['year'][]=$yearname;
 		
 					$data['tweets'][]=(int)$row['tweetcount'];
@@ -87,7 +89,7 @@
 			
 				while($row1=mysql_fetch_array($date_user)){
 				
-						$topuser.= "<b style=\"color:red\">".$row1['users'].":</b> ".$row1['count']." tweets<br/>";
+						$topuser.= "<b><a  style=\"color:red\" href=\"../public/hashtag.php?hash=".urlencode($hash)."&user=".$row1['users']."\">".$row1['users']."</a>:</b> ".$row1['count']." tweets<br/>";
 						$i++;
 				}
 				$data[$yearname]=$topuser;
@@ -115,21 +117,21 @@
 							chart: {
 								renderTo: 'container',
 								type: 'line',
-								marginRight: 130,
-								marginBottom: 25
+								marginRight: 0,
+								marginBottom: 40
 							},
 							title: {
-								text: 'Time line Graph OF <?php echo $index; ?>',
+								text: 'Tweet Count '+'<?php echo $index; ?>',
 								x: -20 //center
 							},
-							//subtitle: {
-							//	text: 'Source: WorldClimate.com',
-							//	x: -20
-							//},
+							subtitle: {
+								text: '<?php echo $goto;?>',
+								x: -20
+							},
 							xAxis: {
 								categories: data['year']
 							},
-							yAxis: {
+							 yAxis: {
 								title: {
 									text: 'Tweet Count'
 								},
@@ -145,14 +147,14 @@
 													this.x +': '+ this.y +'tweets<br/>'+data[this.x];
 									}
 							},
-							legend: {
+							 legend: {
 									layout: 'vertical',
 									align: 'right',
-									verticalAlign: 'top',
+									verticalAlign: 'bottom',
 									x: -10,
 									y: 100,
 									borderWidth: 0
-							},
+							}, 
 							series: [{
 								name: '<?php echo $hash; ?>',
 								data: data['tweets']
@@ -168,8 +170,10 @@
 	
 	
 	<body>
-	
-		
-		<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+			<div style="width:310px; height:200px;overflow:hidden">
+			<div id="graph" style="margin-left:-30px">
+			<div id="container" style="width: 335px; height:200px;"></div>
+			</div>
+			</div>
 	</body>
 </html>
