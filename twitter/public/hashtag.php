@@ -156,7 +156,7 @@
 								<h6 id="hover" align="right" title="embed code"  >Embed</h6>
 	
 								<div id="embed" style="z-index:3" >
-									<b>&lt;iframe width="460" height="315" src="http://localhost/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"
+									<b>&lt;iframe width="460" height="315" src="http://localhost/Twitter-hash-tag/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"
 									frameborder="0" allowfullscreen>&lt;/iframe&gt;</b>
 								</div>
 							</div>
