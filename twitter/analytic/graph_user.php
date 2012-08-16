@@ -12,7 +12,7 @@
 				$i=0;
 			while($row_alltimeuser=mysql_fetch_array($alltimeuser)){
 					$user=$row_alltimeuser['users'];
-					$data1[$i]['name']=$row_alltimeuser['users'];
+					$data1[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&user=".$row_alltimeuser['users']."\">".$row_alltimeuser['users']."</a>";
 					
 					$usr_count=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%c')) AS dates,COUNT(Tweets) as count FROM infotweets WHERE HashTag='$hash' AND (UserID='$user' AND FROM_UNIXTIME(DATETIME,'%Y')='$year') GROUP BY dates");
 				while($row_usr_count=mysql_fetch_array($usr_count)){
@@ -58,7 +58,7 @@
 				$i=0;
 			while($row_alltimeuser=mysql_fetch_array($alltimeuser)){
 					$user=$row_alltimeuser['users'];
-					$data1[$i]['name']=$row_alltimeuser['users'];
+					$data1[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&user=".$row_alltimeuser['users']."\">".$row_alltimeuser['users']."</a>";
 					$usr_count=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%d')) AS dates,COUNT(Tweets) as count FROM infotweets WHERE HashTag='$hash' AND (UserID='$user' AND FROM_UNIXTIME(DATETIME,'%Y,%b')='$year_month') GROUP BY dates");
 				while($row_usr_count=mysql_fetch_array($usr_count)){
 					
@@ -120,7 +120,7 @@
 			while($row_alltimeuser=mysql_fetch_array($alltimeuser)){
 					
 					$user=$row_alltimeuser['users'];
-					$data1[$i]['name']=$user;
+					$data1[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&user=".$row_alltimeuser['users']."\">".$row_alltimeuser['users']."</a>";
 					
 					$usr_count=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%Y')) AS dates,COUNT(Tweets) as count FROM infotweets WHERE HashTag='$hash' AND UserID='$user' GROUP BY dates");
 				
@@ -161,15 +161,15 @@
 
 
 ?>
-<div style="width:615px; height:200px;overflow:hidden;margin-bottom:5px">
+<!--div style="width:615px; height:200px;overflow:hidden;margin-bottom:5px">
 				<div id="graph_user" style="margin-left:-30px;text-align:center">
 				<div id="click_user" style="text-align:center;cursor:pointer">Switch to Tweet Count</div>
 					<div id="user" style="width: 645px; height:200px;"></div>
 				</div>
-			</div>
-<!--html>
+			</div-->
+<html>
 	<head>
-		<script type="text/javascript" src="jquery-latest.js"></script-->
+		<script type="text/javascript" src="jquery-latest.js"></script>
 		<script type="text/javascript">
 				
 				var data1=<?php echo json_encode($data1);?>;
@@ -231,7 +231,7 @@
     
 				});
 		</script>
-		<!--script src="highcharts.js"></script>
+		<script src="highcharts.js"></script>
 		<script src="modules/exporting.js"></script>
 		<script src="themes/grid.js"></script>
 	</head>
@@ -244,4 +244,4 @@
 				</div>
 			</div>
 	</body>
-</html-->
+</html>

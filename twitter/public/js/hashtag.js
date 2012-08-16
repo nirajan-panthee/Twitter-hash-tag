@@ -95,7 +95,8 @@
 	
 	}
 	
-//infinite scroll
+				
+						//infinite scroll
 	$(document).ready(function() {
 		
 		$(window).scroll(function() {
@@ -105,8 +106,8 @@
 					$('div#loadMoreComments').show();
 			
 				$.ajax({
-	
-						url: "scroll.php?lastComment="+ $(".postedComment:last").attr('id')+"&hash="+hashtag ,
+						
+						url: "scroll.php?lastComment="+ $(".postedComment:last").attr('id')+"&hash="+hashtag+link ,
 						success: function(html) {
 							if(html){      
 								$("#postedComments").append(html);

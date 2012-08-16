@@ -6,9 +6,25 @@
 	$i=1;
 	if($_GET['hash']){
 			$hash=$_GET['hash'];
+			$date_query="";
+			$user_query="";
+						if(isset($_GET['user'])){
+								$user_query="AND UserID='".$_GET['user']."'";
+								
+							}
+						if(isset($_GET['year'])&&!isset($_GET['month'])){
+							$date_query="AND FROM_UNIXTIME(DATETIME,'%Y')='".$_GET['year']."'";
+							
+						
+						}else if(isset($_GET['year'])&&isset($_GET['month'])){
+						$dateandmonth=$_GET['year'].",".$_GET['month'];
+						$date_query="AND FROM_UNIXTIME(DATETIME,'%Y,%b')='".$dateandmonth."'";
+						
+						}
+						
 		if($_GET['lastComment']){
 				$i=$_GET['lastComment']+1;
-				$lastid=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$hash'"));
+				$lastid=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$hash' $date_query $user_query"));
 				$last=$lastid['0'];
 	
 			if($last==$i){}else{ 
@@ -16,7 +32,7 @@
 			<table  class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px" style="margin-left:0px">
 			<?php
 				$limit=mysql_real_escape_string($_GET['lastComment']+1);
-				$sqlresult = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' ORDER BY TweetID DESC LIMIT $limit,20");
+				$sqlresult = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' $date_query $user_query ORDER BY TweetID DESC LIMIT $limit,20");
 		
 				while($row = mysql_fetch_array($sqlresult)) { 
 						$tweet=get_link($row['Tweets']); 

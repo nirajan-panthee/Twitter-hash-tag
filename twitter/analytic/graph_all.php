@@ -15,8 +15,8 @@ include 'connection.php';
 					$year=$row_year['dates'];
 					$year_month=$year.",".$month;
 					$monthyear=$month.",".$year;
-					$data[$i]['name']=$monthyear;
-					
+					$data[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&year=".$year."&month=".$month."\" >".$monthyear."</a>";
+					//$data[$i]['name']=$monthyear;
 					$date_day=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%d')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y,%b')='$year_month' GROUP BY dates ORDER BY dates ASC");
 				
 				while($row_day=mysql_fetch_array($date_day)){
@@ -29,7 +29,7 @@ include 'connection.php';
 						$topuser.= "<b style=\"color:red\">".$row_day_user['users']."</b> : ".$row_day_user['count']." tweets<br/>";	
 					
 					}
-					$user[$monthyear][(int)$thisday]=$topuser;
+					$user[$data[$i]['name']][(int)$thisday]=$topuser;
 					
 				
 				}
@@ -78,7 +78,8 @@ include 'connection.php';
 				$index="All Time";
 			while($row=mysql_fetch_array($date_year)){
 					$year=$row['dates'];
-					$data[$i]['name']=$year;
+					$data[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&year=".$year."\">".$year;
+					//$data[$i]['name']=$year;
 					$date_month=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%c')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$year' GROUP BY dates ORDER BY dates DESC");
 			
 				while($row_month=mysql_fetch_array($date_month)){
@@ -94,7 +95,7 @@ include 'connection.php';
 					}
 					$time = mktime(0, 0, 0, $thismonth);
 					$name = '<a href="'.$_SERVER['PHP_SELF'].'?hash='.urlencode($hash).'&month='.strftime("%b", $time).'">'.strftime("%b", $time).'</a>';
-					$user[$year][$name]=$topuser;
+					$user[$data[$i]['name']][$name]=$topuser;
 				}
 				$i++;
 			}
@@ -125,15 +126,10 @@ include 'connection.php';
 		
 		
 ?>
-<div style="width:615px; height:200px;overflow:hidden;margin-bottom:5px">
-			<div id="graph_all" style="margin-left:-30px">
-			<div id="click" style="text-align:center;cursor:pointer">Switch to top user</div>
-			<div id="alltime" style="width: 645px; height:200px;"></div>
-			</div>
-			</div>
-<!--html>
+
+<html>
 	<head>
-		<script type="text/javascript" src="jquery-latest.js"></script-->
+		<script type="text/javascript" src="jquery-latest.js"></script>
 		<script type="text/javascript">
 				
 				var data=<?php echo json_encode($data);?>;
@@ -199,17 +195,17 @@ include 'connection.php';
     
 				});
 		</script>
-		<!--script src="highcharts.js"></script>
+		<script src="highcharts.js"></script>
 		<script src="modules/exporting.js"></script>
 		<script src="themes/grid.js"></script>
 	</head>
 	
 	
 	<body>
-			<!--div style="width:615px; height:200px;overflow:hidden;margin-bottom:5px">
+			<div style="width:615px; height:200px;overflow:hidden;margin-bottom:5px">
 			<div id="graph" style="margin-left:-30px">
 			<div id="alltime" style="width: 645px; height:200px;"></div>
 			</div>
 			</div>
 	</body>
-</html-->
+</html>

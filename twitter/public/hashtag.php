@@ -1,4 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+						if(isset($_GET['hash'])){
+								$url="a";
+								$input=$_GET['hash'];
+								$user_query="";
+								$userID="";
+							if(isset($_GET['user'])){
+								$user_query="AND UserID='".$_GET['user']."'";
+								$userID="@".$_GET['user'];
+								$url="&user=".$_GET['user'];
+							}
+							$date_query="";
+							if(isset($_GET['year'])&&!isset($_GET['month'])){
+									$date_query="AND FROM_UNIXTIME(DATETIME,'%Y')='".$_GET['year']."'";
+									$url=$url="&year=".$_GET['year'];
+						
+							}else if(isset($_GET['year'])&&isset($_GET['month'])){
+									$dateandmonth=$_GET['year'].",".$_GET['month'];
+									$date_query="AND FROM_UNIXTIME(DATETIME,'%Y,%b')='".$dateandmonth."'";
+									$url="&year=".$_GET['year']."&month=".$_GET['month'];
+							}
+						}
+?>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Hash Tag</title>
@@ -7,15 +32,22 @@
 		<link rel="stylesheet" href="css/custom_hash.css">
 		<link rel="stylesheet" href="css/hashtag.css">
 		
-		<script type="text/javascript" src="js/jquery-latest.js"></script> 
+		<script type="text/javascript" src="js/jquery-latest.js"></script>
+		
 		
 		<script type="text/javascript">
 			
 			var hashtag='<?php echo urlencode($_GET['hash']); ?>';	
 		
 		
-		</script>
-		<script type="text/javascript" src="js/hashtag.js"></script>
+		
+		
+						var link='<?php echo $url; ?>';
+		
+					
+					</script>
+					<script type="text/javascript" src="js/hashtag.js"></script>
+		
 	</head>
 
 	<body>
@@ -48,24 +80,20 @@
 
 
 					<?php
-						$input=$_GET['hash'];
-						$user_query="";
-						$userID="";
-						if(isset($_GET['user'])){
-							$user_query="AND UserID='".$_GET['user']."'";
-							$userID="@".$_GET['user'];
-						}
+						
+						
+						
 					
 					
 						 
 						
-						$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input' $user_query"));
+						$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input' $user_query $date_query"));
 						$new=mysql_fetch_array(mysql_query("SELECT HashTag FROM infomax WHERE HashTag='$input'"));
 						$view=mysql_fetch_array(mysql_query("SELECT View FROM infomax WHERE HashTag='$input'"));
 						$view_num=$view['View']+1;
 						mysql_query("UPDATE infomax SET View = $view_num WHERE HashTag='$input'");
 					?>
-
+					
 
 
 
@@ -172,7 +200,7 @@
 			
 							$hash = mysql_real_escape_string(strtolower($_GET['hash']));
 							
-							$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' $user_query ORDER BY TweetID DESC LIMIT 0,20");
+							$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' $user_query $date_query ORDER BY TweetID DESC LIMIT 0,20");
 							$i=1;
 							while($row = mysql_fetch_array($result)){   
 		
