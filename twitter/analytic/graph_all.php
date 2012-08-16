@@ -57,7 +57,10 @@ include 'connection.php';
 					if(!array_key_exists($i,$value['data'])){
 						$data[$key]['data'][$i]=0;
 					}
-					if($value['name']==$curyearmonth && $i==$curday){
+					$check=explode(">",$value['name']);
+					$check=explode("<",$check['1']);
+					//var_dump($check);
+					if($check['0']==$curyearmonth && $i==$curday){
 						break;
 					}
 					if($no_of_days==$i){
@@ -78,7 +81,7 @@ include 'connection.php';
 				$index="All Time";
 			while($row=mysql_fetch_array($date_year)){
 					$year=$row['dates'];
-					$data[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&year=".$year."\">".$year;
+					$data[$i]['name']="<a href=\"".$_SERVER['PHP_SELF']."?hash=".urlencode($hash)."&year=".$year."\">".$year."</a>";
 					//$data[$i]['name']=$year;
 					$date_month=mysql_query("SELECT DISTINCT (FROM_UNIXTIME(DATETIME,'%c')) AS dates, COUNT( Tweets ) AS tweetcount FROM infotweets WHERE HashTag='$hash' AND FROM_UNIXTIME(DATETIME,'%Y')='$year' GROUP BY dates ORDER BY dates DESC");
 			
@@ -108,7 +111,10 @@ include 'connection.php';
 					if(!array_key_exists($i,$value['data'])){
 						$data[$key]['data'][$i]=0;
 					}
-					if($value['name']==$curyear && $i==$curmonth){
+					$check=explode(">",$value['name']);
+					//var_dump($check);
+					
+					if($check['1']==$curyear && $i==$curmonth){
 						break;
 					}
 					$i++;
