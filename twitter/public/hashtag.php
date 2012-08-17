@@ -100,6 +100,7 @@
 
 
 						<div class="tbl">
+							<div><?php include 'bar_graph.php'; ?></div>
 
 							<h3>List of All # Tag 
 								<input type="text" id="search" placeholder="search"  />

@@ -59,7 +59,7 @@ include 'connection.php';
 					}
 					$check=explode(">",$value['name']);
 					$check=explode("<",$check['1']);
-					//var_dump($check);
+					
 					if($check['0']==$curyearmonth && $i==$curday){
 						break;
 					}
