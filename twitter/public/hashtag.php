@@ -163,6 +163,7 @@
 									
 									echo "<a href='hashtag.php?hash=".urlencode($_GET['hash'])."'>".$_GET['hash']."</a> " ?>
 								</h2>
+								
 								<h4>
 								<?php echo $userID; ?>
 								</h4>
@@ -170,6 +171,7 @@
 								<h6>
 									<?php echo $tweet_no['0']." "; ?> tweets Available
 								</h6>
+								
 							</div>
 							<div class="update">
 							<?php 
@@ -183,6 +185,10 @@
 									<a href="tweetapi.php?hash=<?php echo urlencode($input); ?>" target="_blank">Json</a>
 								</h6>
 								<h6 id="hover" align="right" title="embed code"  >Embed</h6>
+								
+								
+								<a href="csv.php?hash=<?php echo urlencode($_GET['hash']); ?>"><button value="" title="download as CSV" style="background-image:url(img/download.png);width:25px;height:25px;border-radius:5px;cursor:pointer"></button></a>
+								
 	
 								<div id="embed" style="z-index:3" >
 									<b>&lt;iframe width="460" height="315" src="http://localhost/Twitter-hash-tag/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"

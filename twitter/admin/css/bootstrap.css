@@ -1618,7 +1618,7 @@ table {
 
 .table-striped tbody tr:nth-child(odd) td,
 .table-striped tbody tr:nth-child(odd) th {
-  background-color: #C1C1C1;
+  background-color: #E9E6E6;
 }
 
 .table tbody tr:hover td,

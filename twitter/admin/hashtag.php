@@ -1,18 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+						if(isset($_GET['hash'])){
+								$url="a";
+								$input=$_GET['hash'];
+								$user_query="";
+								$userID="";
+							if(isset($_GET['user'])){
+								$user_query="AND UserID='".$_GET['user']."'";
+								$userID="@".$_GET['user'];
+								$url="&user=".$_GET['user'];
+							}
+							$date_query="";
+							if(isset($_GET['year'])&&!isset($_GET['month'])){
+									$date_query="AND FROM_UNIXTIME(DATETIME,'%Y')='".$_GET['year']."'";
+									$url=$url="&year=".$_GET['year'];
+						
+							}else if(isset($_GET['year'])&&isset($_GET['month'])){
+									$dateandmonth=$_GET['year'].",".$_GET['month'];
+									$date_query="AND FROM_UNIXTIME(DATETIME,'%Y,%b')='".$dateandmonth."'";
+									$url="&year=".$_GET['year']."&month=".$_GET['month'];
+							}
+						}
+?>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset= utf-8">
-		
+		<title>Hash Tag</title>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		
 		<link rel="stylesheet" href="css/hashtag.css">
 
 		<script type="text/javascript" src="js/jquery-latest.js"></script> 
-		<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+		
+		
 		<script type="text/javascript">
-
+			
 			var hashtag='<?php echo urlencode($_GET['hash']); ?>';	
-		</script>
+		
+		
+		
+		
+						var link='<?php echo $url; ?>';
+		
+					
+					</script>
 		<script type="text/javascript" src="js/hashtag.js"></script>
 
 	</head>
@@ -21,7 +53,7 @@
 		<div  class="head">  
 			<a href="index.php">
 				<h2>
-					<img src="img/Capture.jpg"  alt="twitter logo" />Twitter # Tag
+					<img src="img/twitter.png"  alt="twitter logo"  />Twitter # Tag
 				</h2>
 			</a>
 
@@ -78,14 +110,15 @@
 		<div class="container">
 
 			<div class="right">
-				<div class="add">
+				<div class="add" style="box-shadow:0 0 15px black">
+					
 					<form id="addnewtag" action="hashtag.php?hash=<?php echo urlencode($_GET['hash']); ?>" method="POST" onsubmit="return addHash(this.name)" name="newHash" >
 						<input type="text" name="hashtag" placeholder="Type New # Tag to Add in list..." style="">
 						<button type="submit" class="btn btn-info"  name="newtag"  ><b>Add</b></button>
 					</form> <?php
 					
 					$input=$_GET['hash']; 
-					$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input'"));
+					$tweet_no=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$input' $user_query $date_query"));
 	
 					$new=mysql_fetch_array(mysql_query("SELECT HashTag FROM infomax WHERE HashTag='$input'"));
 					$view=mysql_fetch_array(mysql_query("SELECT View FROM infomax WHERE HashTag='$input'"));
@@ -94,11 +127,11 @@
 					mysql_query("UPDATE infomax SET View = $view_num WHERE HashTag='$input'"); ?>
 
 
-
+					<div><?php include 'bar_graph.php'; ?></div>
 				</div>
 
 
-				<div class="tbl">
+				<div class="tbl" style="box-shadow:0 0 15px black">
 
 					<h3>
 						List of All # Tag 
@@ -127,7 +160,7 @@
 								if($hashcount['0']==0){ ?>
 
 									<tr>
-										<td><a onclick="notweet()" ><b><?php echo $hash; ?></b></a></td>
+										<td><a onclick="notweet()" style="color:#08C"><b><?php echo $hash; ?></b></a></td>
 										<td align="right"><b><?php echo $hashcount['0']; ?></b></td>
 										<td align="right"><b><?php echo $visited['View']; ?></b></td>
 									</tr><?php 
@@ -136,7 +169,7 @@
 								else { ?>
 							
 									<tr>
-										<td><a href="<?php echo "hashtag.php?hash=".urlencode($hash); ?>""><b><?php echo $hash; ?></b></a></td>
+										<td><a style="color:#08C" href="<?php echo "hashtag.php?hash=".urlencode($hash); ?>""><b><?php echo $hash; ?></b></a></td>
 										<td align="right"><b><?php echo $hashcount['0']; ?></b></td>
 										<td align="right"><b><?php echo $visited['View']; ?></b></td>
 									</tr> <?php
@@ -154,10 +187,10 @@
 
 
 
-			<div class="info" style="">
+			<div class="info" style="box-shadow:0 0 15px black">
 				<div class="clearfix" id="bodywraper">
 					<div class="count" style="">	
-						<h2><?php echo $_GET['hash']; ?></h2>
+						<h2><a href="<?php $_SERVER['PHP_SELF']; ?>"><?php echo $_GET['hash']; ?></a></h2>
 						<h6><?php echo $tweet_no['0']." "; ?> tweets Available</h6>
 					</div>
 		
@@ -181,7 +214,12 @@
 						else { ?>
 						
 							<h6 align="right" title="json format" ><a href="tweetapi.php?hash=<?php echo urlencode($input); ?>">Json</a></h6>
-
+							<h6 id="hover" align="right" title="embed code"  >Embed</h6>
+	
+								<div id="embed" style="z-index:3" >
+									<b>&lt;iframe width="460" height="315" src="http://localhost/Twitter-hash-tag/twitter/public/embeded.php?hash=<?php echo urlencode($_GET['hash']); ?>&num=5"
+									frameborder="0" allowfullscreen>&lt;/iframe&gt;</b>
+								</div>
 							<form method="POST" action="index.php" style="margin:10px 0 0 100px">
 								<input type="hidden" name="hash" value="<?php echo $_GET['hash']; ?>">
 								<a  href="<?php echo "csv.php?hash=".urlencode($_GET['hash']); ?>" title="Download as csv File">
@@ -207,15 +245,16 @@
 					
 							</form>
 				</div>
+				<?php include 'graph.php'; ?>
 			</div>
 		</div>
 		
-		<div id="postedComments">
+		<div id="postedComments" style="box-shadow:0 0 15px black">
 
 			<table class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px"> <?php 
 			
 					$hash = mysql_real_escape_string(strtolower($_GET['hash']));
-					$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' ORDER BY TweetID DESC LIMIT 0,20");
+					$result = mysql_query("SELECT UserName,UserID,Tweets,DateTime,image FROM infotweets WHERE HashTag='$hash' $user_query $date_query ORDER BY TweetID DESC LIMIT 0,20");
 					$i=1;
 				while($row = mysql_fetch_array($result)){   
 		
@@ -320,7 +359,7 @@
 		}
 		mysql_close($con);
 	?>
-
+	<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
 
 
 </body>

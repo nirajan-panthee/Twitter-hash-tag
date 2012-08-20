@@ -14,7 +14,7 @@
 			
 ?>
 				<tr class="q">
-					<td ><a onclick="notweet()" ><b ><?php echo $hash; ?></b></a></td>
+					<td ><a onclick="notweet()" style="color:#08C" ><b ><?php echo $hash; ?> </b></a></td>
 						<td align="right"><b><?php echo $hashcount['0']; ?></b></td>
 						<td align="right"><b><?php echo $visited['View']; ?></b></td>
 				</tr>
@@ -22,7 +22,7 @@
 			} else { 
 		?>
 					<tr class="q">
-						<td><a href="<?php echo "hashtag.php?hash=".urlencode($hash); ?>"><b><?php echo $hash; ?></b></a></td>
+						<td><a  style="color:#08C" href="<?php echo "hashtag.php?hash=".urlencode($hash); ?>"><b><?php echo $hash; ?></b></a></td>
 						<td align="right"><b><?php echo $hashcount['0']; ?></b></td>
 						<td align="right"><b><?php echo $visited['View']; ?></b></td>
 					</tr>

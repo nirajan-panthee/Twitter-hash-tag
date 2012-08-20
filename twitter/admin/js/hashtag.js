@@ -1,6 +1,22 @@
 
 	$(document).ready(function() { 
         $("#tblS").tablesorter(); 
+		$('#hover').mouseover(function(){
+			if($('#embed').css('display')=='none')
+			{
+				$('#embed').slideDown().show();
+			}
+				 
+		});
+		$('#embed').mouseenter(function(){
+			$('#embed').show();
+		
+		}).mouseleave(function(){
+			$('#embed').slideUp().hide();
+		
+		});
+		
+		
 	});	
 
 	setTimeout(function(){
@@ -82,7 +98,7 @@
 			
 				$.ajax({
 	
-						url: "scroll.php?lastComment="+ $(".postedComment:last").attr('id')+"&hash="+hashtag ,
+						url: "scroll.php?lastComment="+ $(".postedComment:last").attr('id')+"&hash="+hashtag+link ,
 						success: function(html) {
 							if(html){      
 								$("#postedComments").append(html);
