@@ -230,7 +230,7 @@
 				
 							<form method="POST" action="index.php">
 								<input type="hidden" name="hash" value="<?php echo $hash; ?>">
-								<a href="<?php echo "csv.php?hash=".urlencode($hash); ?>" title="Download as csv File"><input type="submit" value="" class="btn" id="csv"></a>
+								<a href="<?php echo "csv.php?hash=".urlencode($hash); ?>" title="Download as csv File" ><button  type="button" value="" class="btn" id="csv"></button></a>
 								<input type="submit" id="deac" class="btn" name="deact" value="" title="Deactivate the HashTag">
 								<input id="delete" type="submit" class="btn" title="Delete the hashtag" name="delete" value=""  onclick="return deleteHash()">
 					

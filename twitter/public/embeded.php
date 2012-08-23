@@ -64,7 +64,7 @@
 			
 				<?php
 					foreach($json['data'] as $p) {
-						$time=(int)$p['DateTime'];
+						$time=(int)$p['DateTime']+20700;
 				?>
 
 						<tr align="left"style="font-size:10px;" >

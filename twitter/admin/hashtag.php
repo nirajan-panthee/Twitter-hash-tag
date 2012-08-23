@@ -223,7 +223,7 @@
 							<form method="POST" action="index.php" style="margin:10px 0 0 100px">
 								<input type="hidden" name="hash" value="<?php echo $_GET['hash']; ?>">
 								<a  href="<?php echo "csv.php?hash=".urlencode($_GET['hash']); ?>" title="Download as csv File">
-									<input type="submit" value="" class="btn" style="background-image:url(img/download.png);height:23px">
+									<button type="button" value="" class="btn" style="background-image:url(img/download.png);height:23px"></button>
 								</a> <?php
 
 								
@@ -273,7 +273,7 @@
 					<td>
 						<b style="display:inline"><?php echo $row['UserName']; ?></b> <?php 
 						
-						$time=(int)$row['DateTime']; ?>
+						$time=(int)$row['DateTime']+20700; ?>
 			
 						<p style="font-size:10px;float:right"><?php echo Date('H:m:s D,d M Y',$time); ?></p>
 						<p><?php echo $tweet."<br/>"; ?></p>
