@@ -1,4 +1,4 @@
 AuthName "Secure Area"
 AuthType Basic
-AuthUserFile /wamp/www/twitter/pass/.htpasswd
+AuthUserFile /wamp/www/collection/Twitter-hash-tag/twitter/pass/.htpasswd
 require valid-user

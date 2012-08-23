@@ -56,8 +56,8 @@
 		<div class="header">
 			<div class="logo">
 				<a href="index.php" title="HOME">
-					<h2>
-						<img src="img/Capture.jpg"alt="<h6>twitter logo<h6>" />Twitter # Tag
+					<h2 style="color:#FFFFFF">
+						<img src="img/twitter.png" style="width:20px;height:20px;" alt="<h6>twitter logo<h6>" />Twitter # Tag
 					</h2>
 				</a>
 			</div>
@@ -73,7 +73,7 @@
 	
 		<div class="content">
 			<div class="add-wrap">
-				<div class="add">
+				<div class="add" style="box-shadow:0 0 15px black">
       	
 					<form id="addnewtag" action="deactivated.php" method="POST" onsubmit="return addHash(this.name)" name="newHash">
 						<label>
@@ -173,7 +173,7 @@
 					
 					
 	
-			<div class="clearfix" id="bodywraper">
+			<div class="clearfix" id="bodywraper" style="box-shadow:0 0 15px black">
 				<div class="menu">
 					<div id="active" >
 						<a href="deactivated.php">

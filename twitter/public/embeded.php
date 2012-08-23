@@ -49,7 +49,7 @@
 		<div style="background-color:#FFFFFF;border-radius:10px;padding:5px">
 			<?php
 					$dhash=strtolower(urlencode($hash));
-					$url = "http://localhost/Twitter-hash-tag/twitter/public/tweetapi.php?hash=$dhash&num=$num";
+					$url = "http://localhost/collection/Twitter-hash-tag/twitter/public/tweetapi.php?hash=$dhash&num=$num";
 					$curl = curl_init();
 					curl_setopt( $curl, CURLOPT_URL, $url );
 					curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1 );

@@ -27,7 +27,9 @@
 				$lastid=mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM infotweets WHERE HashTag='$hash' $date_query $user_query"));
 				$last=$lastid['0'];
 	
-			if($last==$i){}else{ 
+			if($last==$i){
+				return false;
+			}else{ 
 ?>
 			<table  class="table-striped" bordercolor="#FFFFFF" border="1" cellpadding="5px" style="margin-left:0px">
 			<?php

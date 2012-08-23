@@ -1,5 +1,5 @@
 body {
-background-color:#33CCFF;
+background-color:#42A7C9;
 margin:0px;
 font-family:"Times New Roman",Times,serif;;
 line-height:20px;
@@ -10,7 +10,7 @@ text-align:justify;
 .header {
 width:100%;
 position:fixed;
-background-color:#000000;
+background-image:url(../img/gradient.png);
 }
 
 h2{
@@ -25,7 +25,7 @@ height:30px;
 
 .content{
 margin:0 auto;
-background-image:url(wash-white-30.png);
+/* background-image:url(wash-white-30.png); */
 width:1040px;
 padding-top:30px;
 

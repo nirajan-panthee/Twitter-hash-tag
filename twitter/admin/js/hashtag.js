@@ -104,6 +104,9 @@
 								$("#postedComments").append(html);
 								$('div#loadMoreComments').hide();
 							}
+							else{
+								$('div#loadMoreComments').replaceWith("End of Data");
+							}
 						}
 				});
 			}
