@@ -50,7 +50,7 @@
 	</head>
 
 	<body>
-		<div  class="head">  
+		<div  class="head" style="z-index:5">  
 			<a href="index.php">
 				<h2>
 					<img src="img/twitter.png"  alt="twitter logo"  />Twitter # Tag
