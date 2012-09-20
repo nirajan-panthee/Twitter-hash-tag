@@ -190,7 +190,10 @@
 			<div class="info" style="box-shadow:0 0 15px black">
 				<div class="clearfix" id="bodywraper">
 					<div class="count" style="">	
-						<h2><a href="<?php $_SERVER['PHP_SELF']; ?>"><?php echo $_GET['hash']; ?></a></h2>
+						<h2><?php 
+									
+									
+									echo "<a href='hashtag.php?hash=".urlencode($_GET['hash'])."'>".$_GET['hash']."</a> " ?></h2>
 						<h6><?php echo $tweet_no['0']." "; ?> tweets Available</h6>
 					</div>
 		
