@@ -1,10 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
+require 'connection.php';
 						if(isset($_GET['hash'])){
 								$url="&a";
-								$input=$_GET['hash'];
+								$input=mysql_real_escape_string($_GET['hash']);
 								$user_query="";
 								$userID="";
+								$valid=mysql_fetch_array(mysql_query("SELECT HashTag FROM infomax WHERE HashTag='$input'"));
+								if(!isset($valid['HashTag']))
+								{
+									
+									header("Location: https://twitter.com/search/".urlencode($_GET['hash']));
+								}
 							if(isset($_GET['user'])){
 								$user_query="AND UserID='".$_GET['user']."'";
 								$userID="@".$_GET['user'];
@@ -62,7 +69,7 @@
 
 
 	<?php 
-		require 'connection.php';
+		
 		
 		
 		if(isset($_GET['hash'])) {
